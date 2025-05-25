@@ -1,1 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOllapse - Участники</title>
+    <style>
+        :root {
+            --primary-color: #5D4037;
+            --secondary-color: #3E2723;
+            --accent-color: #8D6E63;
+            --light-color: #EFEBE9;
+            --dark-color: #212121;
+            --link-color: #5D4037;
+            --link-hover: #3E2723;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--link-hover);
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            gap: 10px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            gap: 10px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Основной контент */
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: white;
+        }
+        
+        .title-with-background {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            background-image: url('фон4.png'); /* Укажите путь к вашему изображению */
+            background-size: cover; /* Масштабируем изображение, чтобы оно покрывало весь элемент */
+            background-position: center; /* Центрируем изображение */
+            padding: 2rem; /* Добавьте отступы, чтобы текст не прижимался к краям */
+            color: white; /* Измените цвет текста, чтобы он был видимым на фоне изображения */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Добавьте тень к тексту для улучшения читаемости */
+            border-radius: 10px; /* Опционально: скругленные углы */
+        }
+        
+        
+        .section {
+            margin-bottom: 5rem;
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        
+        
+        /* Список участников */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-card {
+            background: linear-gradient(145deg, #EFEBE9, #D7CCC8);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            border: 1px solid #BCAAA4;
+        }
+
+        .team-card:last-child:nth-child(3n+1) {
+            grid-column: 2;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .member-task {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        
+        .footer-section a {
+            color: #BCAAA4;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            color: #BCAAA4;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <a href="main.html" class="logo">
+                <img src="челик2.png" alt="Логотип ECOllapse">
+                <span class="logo-text">ECOllapse</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Главная</a></li>
+                    <li><a href="about.html">О проекте</a></li>
+                    <li><a href="team.html" class="active">Участники</a></li>
+                    <li><a href="blog.html">Журнал</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="page-container">
+            <div class="page-header">
+                <h1 class="title-with-background">Наша команда</h1>
+            </div>
+            
+            <div class="section">
+                <div class="team-grid">
+                    <!-- Участники -->
+                    <div class="team-card">
+                        <h3 class="member-name">Ахметов Арслан Рафаэлевич</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Борисенко Даниил Максимович</h3>
+                        <p class="member-task">Помощь в создании более подробного описания проекта, создание идей для игры, помощь в написании сеттинга игрового мира. Генерация мира</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Брюхов Светослав Алексеевич</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Буренков Олег Дмитриевич</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях. Прототип главного меню + статы частей тела</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Бычков Василий Денисович</h3>
+                        <p class="member-task">Работа с кодом, а также работа с игровым движком Unity, редактирование и правка готового сеттинга мира для простоты понимания читающим участникам проекта. Отдельные элементы окружающей среды</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Горбачев Илья Вячеславович</h3>
+                        <p class="member-task">Создание и управление github-репозиторием, создание таблицы с ролями и контактной информацией участников проекта, создание идей для игры, помощь в написании сеттинга игрового мира. Реализация существа</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Грачев Павел Александрович</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях. Техническая часть взаимодействия с миром</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Зайцев Владислав Денисович</h3>
+                        <p class="member-task">Координация группы аналитиков, а также проведение анализа целевой аудитории проекта. Техническая часть взаимодействия с миром</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Извекова Диана Дмитриевна</h3>
+                        <p class="member-task">Создание новых стейкхолдеров и карты исследований опыта, оформление данных от аналитиков, создание презентации. Создание локации (визуал + тех. часть)</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Казаринов Александр Владимирович</h3>
+                        <p class="member-task">Анализ сильных и слабых сторон конкурентов, придумывание возможных решений их проблем в нашем проекте</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Клевин Александр Ильич</h3>
+                        <p class="member-task">Анализ рынка подобных игр, работа с интерфейсом игрока. Главное меню</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Козак Юлия Андреевна</h3>
+                        <p class="member-task">Создание и проведение опроса людей, играющих в игры. Камера игрока</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Комар Ярослава-Прасковья Руслановна</h3>
+                        <p class="member-task">Создание и проведение опроса людей, играющих в игры. Отдельные элементы окружающей среды</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Кочетков Юрий Олегович</h3>
+                        <p class="member-task">Организация состава художников, сбор данных по целевой аудитории проекта, организация состава программистов, создание списка ключевых решений продукта, описание технологической базы проекта, составление Диаграммы Ганта. Создание локации</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Кривоносова Варвара Владимировна</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Матвеев Александр Романович</h3>
+                        <p class="member-task">Помощь в определении проблемы потребителя, которую будет решать проект</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Муртазина Милана Рамилевна</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Носова Дарья Сергеевна</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях. Статы частей тела + интерфейс мутаций</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Павлов Вячеслав Станиславович</h3>
+                        <p class="member-task">Распределение задач, нужных для достижения цели проекта, описание актуальности, целей и задач проекта, а также составление первичного описания проекта, создание таблицы с участниками проекта и их контактами. Инициатор проекта</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Пак Диана Олеговна</h3>
+                        <p class="member-task">Создание и проведение опроса людей, играющих в игры. Отдельные элементы окружающей среды</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Петухов Максим Дмитриевич</h3>
+                        <p class="member-task">Работа со звуком, создание саундтреков к игре</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Румянцев Влад</h3>
+                        <p class="member-task">Анализ целевой аудитории</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Рябов Михаил Андреевич</h3>
+                        <p class="member-task">Создание презентации к первой аттестации, обработка данных, полученных от аналитиков целевой аудитории. Техническая часть взаимодействия с миром</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Савин Даниил Александрович</h3>
+                        <p class="member-task">Помощь в создании более подробного описания проекта, создание идей для игры, помощь в написании сегмента игрового мира. Генерация мира</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Тарнава Максим Дмитриевич</h3>
+                        <p class="member-task">Создание и проведение опроса людей, играющих в игры. Генерация мира (сферическая планета, тайлы)</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Титяев Анатолий Алексеевич</h3>
+                        <p class="member-task">Создание концепт-артов с идеями для игры, а также для использования в различных презентациях, создание идей и помощь в описании сеттинга игры</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Ткачев Дмитрий Александрович</h3>
+                        <p class="member-task">Создание презентации к первой и второй аттестации, обработка данных, полученных от аналитиков целевой аудитории, распределение задач между аналитиками, их координация. Создание идей и помощь в описании сеттинга игры</p>
+                    </div>
+                    
+                    <div class="team-card">
+                        <h3 class="member-name">Щеглов Семён Олегович</h3>
+                        <p class="member-task">Помощь в создании более подробного описания проекта, создание идей для игры, помощь в написании сеттинга игрового мира. Создание локации</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Email: info@ecollapse-game.com</p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+            </div>
+            <div class="footer-section">
+                <h3>Быстрые ссылки</h3>
+                <ul>
+                    <li><a href="main.html">Главная</a></li>
+                    <li><a href="about.html">О проекте</a></li>
+                    <li><a href="blog.html">Журнал</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Социальные сети</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Проектная деятельность. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
