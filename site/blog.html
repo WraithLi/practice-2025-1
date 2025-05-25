@@ -1,1 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOllapse - Журнал</title>
+    <style>
+        :root {
+            --primary-color: #5D4037;
+            --secondary-color: #3E2723;
+            --accent-color: #8D6E63;
+            --light-color: #EFEBE9;
+            --dark-color: #212121;
+            --link-color: #5D4037;
+            --link-hover: #3E2723;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--link-hover);
+        }
+        
+        /* Шапка */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            gap: 10px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-text {
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            gap: 10px;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Основной контент */
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: white;
+        }
+
+        .title-with-background {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            background-image: url('фон1.png'); /* Укажите путь к вашему изображению */
+            background-size: cover; /* Масштабируем изображение, чтобы оно покрывало весь элемент */
+            background-position: center; /* Центрируем изображение */
+            padding: 2rem; /* Добавьте отступы, чтобы текст не прижимался к краям */
+            color: white; /* Измените цвет текста, чтобы он был видимым на фоне изображения */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Добавьте тень к тексту для улучшения читаемости */
+            border-radius: 10px; /* Опционально: скругленные углы */
+        }
+        
+        /* Посты в журнале */
+        .journal-posts {
+            display: grid;
+            gap: 3rem;
+        }
+        
+        .post {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .post-header {
+            margin-bottom: 2rem;
+        }
+        
+        .post-title {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-date {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+        
+        .post-content {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        
+        .footer-section a {
+            color: #BCAAA4;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            color: #BCAAA4;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            
+            .post {
+                padding: 1.5rem;
+            }
+            
+            .post-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-container">
+            <a href="main.html" class="logo">
+                <img src="челик2.png" alt="Логотип ECOllapse">
+                <span class="logo-text">ECOllapse</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Главная</a></li>
+                    <li><a href="about.html">О проекте</a></li>
+                    <li><a href="team.html">Участники</a></li>
+                    <li><a href="blog.html" class="active">Журнал</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="page-container">
+            <div class="page-header">
+                <h1 class="title-with-background">Журнал разработки</h1>
+            </div>
+            
+            <div class="journal-posts">
+                <!-- Пост 1: Процедурная генерация мира -->
+                <article class="post">
+                    <div class="post-header">
+                        <h2 class="post-title">Процедурная генерация мира</h2>
+                        <div class="post-date">20 апреля 2025</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>Реализована базовая система процедурной генерации игрового мира. Теперь каждый запуск игры создаёт уникальный мир с разнообразными биомами и ландшафтами.</p>
+                        
+                        <p>Основные характеристики:</p>
+                        <ul>
+                            <li>Генерация сферической планеты</li>
+                            <li>Динамическое распределение ресурсов</li>
+                            <li>Автоматическое создание рельефа и водных объектов</li>
+                        </ul>
+                        
+                        <div class="video-container">
+                            <iframe src="видео1.mp4" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        
+                        <p>Следующие шаги: добавление климатических зон и сезонных изменений.</p>
+                    </div>
+                </article>
+                
+                <!-- Пост 2: Выпадение материалов -->
+                <article class="post">
+                    <div class="post-header">
+                        <h2 class="post-title">Реализовано выпадение материалов</h2>
+                        <div class="post-date">24 апреля 2025</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>Добавлена система дропа (выпадения) материалов при взаимодействии с объектами окружающей среды.</p>
+                        
+                        <p>Ключевые особенности:</p>
+                        <ul>
+                            <li>Несколько базовых видов дропаемых ресурсов</li>
+                            <li>Различные типы дропа (гарантированный, случайный, комбинированный)</li>
+                            <li>Визуализация собираемых предметов</li>
+                        </ul>
+                        
+                        <div class="video-container">
+                            <iframe src="видео2.mp4" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        
+                        <p>В разработке: система крафта из собранных материалов, влияние характеристик существа на вероятность выпадения.</p>
+                    </div>
+                </article>
+                
+                <!-- Пост 3: Главное меню -->
+                <article class="post">
+                    <div class="post-header">
+                        <h2 class="post-title">Главное меню игры</h2>
+                        <div class="post-date">27 апреля 2025</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>Завершена разработка главного меню игры - первого экрана, который видит игрок при запуске.</p>
+                        
+                        <p>Функционал главного меню:</p>
+                        <ul>
+                            <li>Кнопка "Начать игру"</li>
+                            <li>Раздел настроек (графика, звук, управление)</li>
+                            <li>Кнопка "Выход"</li>
+                            <li>Анимации кнопок и перехода между экранами</li>
+                        </ul>
+                        
+                        <div class="video-container">
+                            <iframe src="видео3.mp4" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        
+                        <p>Планируется: добавление системы достижений и статистики, выбор уровня сложности.</p>
+                    </div>
+                </article>
+                
+                <!-- Пост 4: Движение персонажа и камера -->
+                <article class="post">
+                    <div class="post-header">
+                        <h2 class="post-title">Движение персонажа и система камеры</h2>
+                        <div class="post-date">5 мая 2025</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        <p>Реализована система перемещения игрового существа и привязки камеры.</p>
+                        
+                        <p>Особенности реализации:</p>
+                        <ul>
+                            <li>Ходьба, бег, прыжки существа</li>
+                            <li>Камера с фиксированным обзором</li>
+                        </ul>
+                        
+                        <div class="video-container">
+                            <iframe src="видео4.mp4" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        
+                        <p>В разработке: дополнительные эффекты на экране в зависимости от окружающих условий.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p>Email: info@ecollapse-game.com</p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+            </div>
+            <div class="footer-section">
+                <h3>Быстрые ссылки</h3>
+                <ul>
+                    <li><a href="main.html">Журнал</a></li>
+                    <li><a href="about.html">О проекте</a></li>
+                    <li><a href="team.html">Участники</a></li>
+                    <li><a href="resources.html">Ресурсы</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Социальные сети</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Проектная деятельность. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
